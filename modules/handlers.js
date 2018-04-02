@@ -16,9 +16,17 @@ exports.upload = function(request, response) {
 }
 
 exports.show = function(request, response) {
-    fs.readFile('./images/cat.jpg', 'binary', function(error, file) {
+    fs.readFile('images/cat.jpg', 'binary', function(error, file) {
         response.writeHead(200, {'Content-Type': 'image/jpeg'});
         response.write(file, 'binary');
+        response.end();
+    });
+}
+
+exports.style = function(request, response) {
+    fs.readFile('styles/main.css', function(err, css) {
+        response.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
+        response.write(css);
         response.end();
     });
 }
