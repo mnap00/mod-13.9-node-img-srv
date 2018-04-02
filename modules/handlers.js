@@ -7,10 +7,11 @@ exports.upload = function(request, response) {
     form.uploadDir = './temporary';
     form.parse(request, function(error, fields, files) {
         fs.renameSync(files.upload.path, './images/' + files.upload.name);
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.write('Received image:<br/>');
-        response.write('<img src="/show" />');
-        response.end();
+        fs.readFile('templates/upload.html', function(err, html) {
+            response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+            response.write(html);
+            response.end();
+        });
     });
 }
 
@@ -29,6 +30,14 @@ exports.show = function(request, response) {
 //        response.writeHead(200, {'Content-Type': 'image/jpeg'});
 //        response.write(file, 'binary');
 //        response.end();
+    });
+}
+
+exports.style = function(request, response) {
+    fs.readFile('styles/main.css', function(err, css) {
+        response.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
+        response.write(css);
+        response.end();
     });
 }
 
