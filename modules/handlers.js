@@ -20,6 +20,9 @@ exports.show = function(request, response) {
         if (err) throw err;
         files.forEach(function(file) {
             console.log(file);
+            // that will not work
+            // - we need different upload.html and response write
+            // - write html directly?
             fs.readFile('./images/' + file, 'binary', function(error, file) {
                 response.writeHead(200, {'Content-Type': 'image/*'});
                 response.write(file, 'binary');
