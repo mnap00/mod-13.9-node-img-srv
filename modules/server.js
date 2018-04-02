@@ -6,7 +6,7 @@ var handlers = require('./handlers');
 function start() {
     function onRequest(request, response) {
         console.log('Got request.'.green);
-        console.log('Request ' + request.url + 'confirmed');
+        console.log('Request ' + request.url + ' confirmed');
 
         response.writeHead(200, {'Content-Type': 'text/plain'});
 
