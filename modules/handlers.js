@@ -15,10 +15,20 @@ exports.upload = function(request, response) {
 }
 
 exports.show = function(request, response) {
-    fs.readFile('./images/cat.jpg', 'binary', function(error, file) {
-        response.writeHead(200, {'Content-Type': 'image/jpeg'});
-        response.write(file, 'binary');
-        response.end();
+    fs.readdir('./images', function(err, files) {
+        if (err) throw err;
+        files.forEach(function(file) {
+            console.log(file);
+            fs.readFile('./images/' + file, 'binary', function(error, file) {
+                response.writeHead(200, {'Content-Type': 'image/*'});
+                response.write(file, 'binary');
+                response.end();
+            });
+        });
+//    fs.readFile('./images/cat.jpg', 'binary', function(error, file) {
+//        response.writeHead(200, {'Content-Type': 'image/jpeg'});
+//        response.write(file, 'binary');
+//        response.end();
     });
 }
 
